@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+import { readFileSync, writeFileSync } from 'node:fs';
+import { validateShotList, diffShotLists, upstreamChanges } from '../src/check.mjs';
+import { compileAnimatic } from '../src/animatic.mjs';
+
+const HELP = `storyboard — ShotList check compiler (draft tooling, not a packaged plugin)
+
+Commands:
+  check <shotlist.json>            run all domain gates; exit 0 accepted, 1 issues
+  diff <previous.json> <next.json>   report added/removed/moved/changed shot ids
+  upstream <previous.json> <next.json>  report changed upstream revision refs
+  animatic <shotlist.json> [--to <path>]  compile an edit-decision-1.1.0 draft
+`;
+
+const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'));
+const emit = (io, value) => io.stdout.write(`${JSON.stringify(value, null, 2)}\n`);
+
+export async function main(argv, io = process) {
+  const [command, ...rest] = argv;
+  if (command === undefined || command === 'help' || command === '--help') { io.stderr.write(HELP); return command === undefined ? 2 : 0; }
+  try {
+    if (command === 'check') {
+      const result = validateShotList(readJson(rest[0]));
+      emit(io, result);
+      return result.accepted ? 0 : 1;
+    }
+    if (command === 'diff') {
+      emit(io, diffShotLists(readJson(rest[0]), readJson(rest[1])));
+      return 0;
+    }
+    if (command === 'upstream') {
+      emit(io, { changed: upstreamChanges(readJson(rest[0]), readJson(rest[1])) });
+      return 0;
+    }
+    if (command === 'animatic') {
+      const shotList = readJson(rest[0]);
+      const gate = validateShotList(shotList);
+      if (!gate.accepted) { emit(io, gate); return 1; }
+      const result = compileAnimatic(shotList);
+      const toIndex = rest.indexOf('--to');
+      if (toIndex >= 0) writeFileSync(rest[toIndex + 1], `${JSON.stringify(result.editDecision, null, 2)}\n`);
+      emit(io, result);
+      return 0;
+    }
+    io.stderr.write(`Unknown command: ${command}\n`);
+    return 2;
+  } catch (error) {
+    io.stderr.write(`${error.message}\n`);
+    return 1;
+  }
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  process.exitCode = await main(process.argv.slice(2));
+}

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://partme.ai/schemas/storyboard/shot-list-1.0.0.json",
+  "title": "ShotList",
+  "description": "Storyboard declarative source: shots, panels, asset bindings and semantic anchors. Draft contract aligned with the semantic-time vocabulary of edit-decision-1.1.0; workbench contract alignment is pending (contracts.lock.json status design_baseline_not_released).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "revision", "fps", "targetDurationTicks", "upstream", "characters", "props", "assets", "shots"],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "id": { "type": "string", "minLength": 1 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "fps": {
+      "type": "object", "additionalProperties": false, "required": ["numerator", "denominator"],
+      "properties": { "numerator": { "type": "integer", "minimum": 1 }, "denominator": { "type": "integer", "minimum": 1 } }
+    },
+    "targetDurationTicks": { "type": "integer", "minimum": 1 },
+    "upstream": {
+      "type": "object", "additionalProperties": false, "required": ["screenplay", "directorPlan"],
+      "properties": {
+        "screenplay": { "type": "string", "minLength": 1 },
+        "directorPlan": { "type": "string", "minLength": 1 },
+        "shotIntents": { "type": "string", "minLength": 1 }
+      }
+    },
+    "characters": {
+      "type": "array", "maxItems": 100,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "displayName", "wardrobe"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^char:[a-z0-9-]{1,40}$" },
+          "displayName": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "wardrobe": { "type": "string", "minLength": 1, "maxLength": 200 }
+        }
+      }
+    },
+    "props": {
+      "type": "array", "maxItems": 200,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^prop:[a-z0-9-]{1,40}$" },
+          "name": { "type": "string", "minLength": 1, "maxLength": 80 }
+        }
+      }
+    },
+    "assets": {
+      "type": "array", "maxItems": 500,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "kind", "authorized", "source"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^A[0-9]{2,4}$" },
+          "kind": { "type": "string", "enum": ["board", "reference", "audio"] },
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "authorized": { "type": "boolean" },
+          "source": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "speech": {
+      "type": "object", "additionalProperties": false, "required": ["language", "words"],
+      "properties": {
+        "language": { "type": "string", "minLength": 2, "maxLength": 12 },
+        "words": {
+          "type": "array", "minItems": 1, "maxItems": 20000,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["id", "text", "startTicks", "endTicks"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^W[0-9]{1,6}$" },
+              "text": { "type": "string", "minLength": 1, "maxLength": 64 },
+              "startTicks": { "type": "integer", "minimum": 0 },
+              "endTicks": { "type": "integer", "minimum": 1 }
+            }
+          }
+        }
+      }
+    },
+    "moments": {
+      "type": "array", "maxItems": 200,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "wordId", "affinity"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$" },
+          "wordId": { "type": "string", "pattern": "^W[0-9]{1,6}$" },
+          "affinity": { "type": "string", "enum": ["start", "end"] }
+        }
+      }
+    },
+    "selections": {
+      "type": "array", "maxItems": 200,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "startWordId", "startAffinity", "endWordId", "endAffinity"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$" },
+          "startWordId": { "type": "string", "pattern": "^W[0-9]{1,6}$" },
+          "startAffinity": { "type": "string", "enum": ["start", "end"] },
+          "endWordId": { "type": "string", "pattern": "^W[0-9]{1,6}$" },
+          "endAffinity": { "type": "string", "enum": ["start", "end"] }
+        }
+      }
+    },
+    "shots": {
+      "type": "array", "minItems": 1, "maxItems": 500,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "scene", "slug", "action", "sound", "direction", "characterRefs", "propRefs", "dialogue", "plannedDurationTicks", "panels"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^S[0-9]{3,4}$" },
+          "scene": { "type": "integer", "minimum": 1 },
+          "slug": { "type": "string", "enum": ["ecu", "cu", "mcu", "ms", "mws", "ws", "ews", "insert"] },
+          "action": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "sound": { "type": "string", "maxLength": 200 },
+          "direction": { "type": "string", "enum": ["left", "right", "center"] },
+          "characterRefs": { "type": "array", "maxItems": 10, "items": { "type": "string", "pattern": "^char:[a-z0-9-]{1,40}$" } },
+          "propRefs": { "type": "array", "maxItems": 20, "items": { "type": "string", "pattern": "^prop:[a-z0-9-]{1,40}$" } },
+          "dialogue": {
+            "type": "array", "maxItems": 10,
+            "items": {
+              "type": "object", "additionalProperties": false, "required": ["characterRef", "text"],
+              "properties": {
+                "characterRef": { "type": "string", "pattern": "^char:[a-z0-9-]{1,40}$" },
+                "text": { "type": "string", "minLength": 1, "maxLength": 500 }
+              }
+            }
+          },
+          "plannedDurationTicks": { "type": "integer", "minimum": 1 },
+          "anchor": {
+            "type": "object", "additionalProperties": false, "required": ["at"],
+            "properties": {
+              "at": { "type": "string", "pattern": "^(moment:[a-z][a-z0-9-]{0,39}|selection:[a-z][a-z0-9-]{0,39}:(start|end)|speech:(start|end)|tick:[0-9]+)$" },
+              "offsetTicks": { "type": "integer" }
+            }
+          },
+          "panels": {
+            "type": "array", "minItems": 1, "maxItems": 20,
+            "items": {
+              "type": "object", "additionalProperties": false, "required": ["id", "layout"],
+              "properties": {
+                "id": { "type": "string", "pattern": "^P[0-9]{2,4}$" },
+                "layout": { "type": "string", "minLength": 1, "maxLength": 300 },
+                "assetId": { "type": "string", "pattern": "^A[0-9]{2,4}$" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

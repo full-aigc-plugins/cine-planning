@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "shotlist-demo",
+  "revision": 1,
+  "fps": { "numerator": 30, "denominator": 1 },
+  "targetDurationTicks": 390,
+  "upstream": { "screenplay": "screenplay@3", "directorPlan": "director-plan@2", "shotIntents": "shot-intents@1" },
+  "characters": [
+    { "id": "char:maya", "displayName": "Maya", "wardrobe": "绿色飞行夹克" },
+    { "id": "char:leo", "displayName": "Leo", "wardrobe": "蓝色卫衣" }
+  ],
+  "props": [
+    { "id": "prop:phone", "name": "手机" }
+  ],
+  "assets": [
+    { "id": "A01", "kind": "board", "path": "boards/s001.png", "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "authorized": true, "source": "codex-image-factory@2" },
+    { "id": "A02", "kind": "board", "path": "boards/s002.png", "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "authorized": true, "source": "codex-image-factory@2" },
+    { "id": "A03", "kind": "board", "path": "boards/s003.png", "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "authorized": true, "source": "codex-image-factory@2" },
+    { "id": "A04", "kind": "board", "path": "boards/s004.png", "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "authorized": true, "source": "codex-image-factory@2" }
+  ],
+  "speech": {
+    "language": "zh",
+    "words": [
+      { "id": "W1", "text": "我们", "startTicks": 0, "endTicks": 45 },
+      { "id": "W2", "text": "已经", "startTicks": 45, "endTicks": 105 },
+      { "id": "W3", "text": "上线", "startTicks": 105, "endTicks": 135 },
+      { "id": "W4", "text": "了", "startTicks": 135, "endTicks": 150 },
+      { "id": "W5", "text": "看", "startTicks": 210, "endTicks": 240 },
+      { "id": "W6", "text": "效果", "startTicks": 240, "endTicks": 300 }
+    ]
+  },
+  "moments": [
+    { "id": "answer", "wordId": "W4", "affinity": "end" }
+  ],
+  "selections": [
+    { "id": "demo", "startWordId": "W5", "startAffinity": "start", "endWordId": "W6", "endAffinity": "end" }
+  ],
+  "shots": [
+    {
+      "id": "S001", "scene": 1, "slug": "ms",
+      "action": "Maya 面向镜头宣布上线", "sound": "室内底噪",
+      "direction": "center",
+      "characterRefs": ["char:maya"], "propRefs": [],
+      "dialogue": [{ "characterRef": "char:maya", "text": "我们已经上线了" }],
+      "plannedDurationTicks": 150,
+      "anchor": { "at": "speech:start" },
+      "panels": [{ "id": "P01", "layout": "中景，Maya 居中，身后是工作台", "assetId": "A01" }]
+    },
+    {
+      "id": "S002", "scene": 1, "slug": "cu",
+      "action": "Leo 看向手机屏幕的反应", "sound": "室内底噪",
+      "direction": "right",
+      "characterRefs": ["char:leo"], "propRefs": ["prop:phone"],
+      "dialogue": [],
+      "plannedDurationTicks": 60,
+      "anchor": { "at": "moment:answer" },
+      "panels": [{ "id": "P01", "layout": "特写 Leo，屏幕光映在脸上", "assetId": "A02" }]
+    },
+    {
+      "id": "S003", "scene": 2, "slug": "ws",
+      "action": "演示开始，两人走向展示区", "sound": "音乐起",
+      "direction": "left",
+      "characterRefs": ["char:maya"], "propRefs": [],
+      "dialogue": [],
+      "plannedDurationTicks": 90,
+      "anchor": { "at": "selection:demo:start" },
+      "panels": [{ "id": "P01", "layout": "全景，展示区在画面左侧", "assetId": "A03" }]
+    },
+    {
+      "id": "S004", "scene": 2, "slug": "insert",
+      "action": "手机屏幕插入镜头", "sound": "音乐持续",
+      "direction": "center",
+      "characterRefs": [], "propRefs": ["prop:phone"],
+      "dialogue": [{ "characterRef": "char:leo", "text": "看效果" }],
+      "plannedDurationTicks": 90,
+      "anchor": { "at": "speech:end" },
+      "panels": [{ "id": "P01", "layout": "插入镜头，手机 UI 特写", "assetId": "A04" }]
+    }
+  ]
+}
