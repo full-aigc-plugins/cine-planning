@@ -68,7 +68,7 @@ test('missing images must not impersonate generated ones and unauthorized assets
   unauthorized.assets[1].authorized = false;
   assert.ok(codes(validateShotList(unauthorized)).includes('UNAUTHORIZED_GENERATION'));
   const declared = positive();
-  declared.assets.push({ id: 'A05', kind: 'board', authorized: true, source: 'codex-image-factory@2' });
+  declared.assets.push({ id: 'A05', kind: 'board', authorized: true, source: 'image-factory@2' });
   declared.shots[3].panels[0].assetId = 'A05';
   const missing = validateShotList(declared);
   assert.ok(codes(missing).includes('IMAGE_MISSING'));

@@ -15,12 +15,12 @@
 
 | Skill 计划名 | 用途 | 可观察行为 |
 |---|---|---|
-| codex-script-source | 读取与原文覆盖 | 按章节增量读原文，提取事实、事件与实体别名，绑定 source_id/revision/span；记录未提供和未处理范围。 |
-| codex-script-adapt | 改编策略 | 依据用户的目标长度和风格给出保留、合并、删减和原创新增；原文事实与创作推断分别标注。 |
-| codex-script-outline | 大纲与分集 | 输出总纲、集纲和场次目标；记录人物动机、伏笔、事件顺序与人物知识边界。 |
-| codex-script-screenplay | 分场剧本 | 场次含标题、内外景/时段、角色、冲突、动作、对白、入出状态和来源；保护人工锁定段落。 |
-| codex-script-breakdown | 语义拆解 | 提取角色、地点、服装、道具、声音和VFX需求，提供候选 AssetSpec；同一实体不重复建ID。 |
-| codex-script-revision | 改写与交付 | 提交候选 revision，返回改编说明/覆盖报告；结束到剧本的请求，或在完整制作授权下交接 Director。 |
+| script-source | 读取与原文覆盖 | 按章节增量读原文，提取事实、事件与实体别名，绑定 source_id/revision/span；记录未提供和未处理范围。 |
+| script-adapt | 改编策略 | 依据用户的目标长度和风格给出保留、合并、删减和原创新增；原文事实与创作推断分别标注。 |
+| script-outline | 大纲与分集 | 输出总纲、集纲和场次目标；记录人物动机、伏笔、事件顺序与人物知识边界。 |
+| script-screenplay | 分场剧本 | 场次含标题、内外景/时段、角色、冲突、动作、对白、入出状态和来源；保护人工锁定段落。 |
+| script-breakdown | 语义拆解 | 提取角色、地点、服装、道具、声音和VFX需求，提供候选 AssetSpec；同一实体不重复建ID。 |
+| script-revision | 改写与交付 | 提交候选 revision，返回改编说明/覆盖报告；结束到剧本的请求，或在完整制作授权下交接 Director。 |
 
 ```mermaid
 flowchart LR
@@ -71,4 +71,4 @@ flowchart LR
 
 ## 7. 发行边界
 
-本轮不安装、不创建 marketplace entry。实现阶段再依据真实可用 Skills 创建 .codex-plugin/plugin.json；插件 ID 使用 codex-script，repo 名带 -plugin，与现有组织仓库命名一致。若脚手架要求包目录与ID相同，放在 plugins/codex-script 并在发行目录保持同名，不为绕过规范改变用户仓库名。
+本轮不安装、不创建 marketplace entry。实现阶段再依据真实可用 Skills 创建 .codex-plugin/plugin.json；插件 ID 使用 script，repo 名带 -plugin，与现有组织仓库命名一致。若脚手架要求包目录与ID相同，放在 plugins/script 并在发行目录保持同名，不为绕过规范改变用户仓库名。

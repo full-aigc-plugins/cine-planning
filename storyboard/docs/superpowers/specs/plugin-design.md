@@ -15,12 +15,12 @@
 
 | Skill 计划名 | 用途 | 可观察行为 |
 |---|---|---|
-| codex-storyboard-resolve | 读取意图与素材 | 核对每场导演意图、现有资产ID/版本和缺失项；允许原创时登记任务，否则集中请求素材。 |
-| codex-storyboard-shots | 镜头拆解 | 为每镜创建稳定ID、显示镜号、景别、动作、声音、时长与入出状态；高密度动作拆成可执行镜头。 |
-| codex-storyboard-panels | 图文面板 | 每镜允许多个分镜面板；先生成文字布局，按授权调用现有图片插件并关联真实候选文件。 |
-| codex-storyboard-continuity | 连续性检查 | 检查角色服装、唯一道具、左右方向、动作接点、光线和剧情状态；检查时长合计与对白长度。 |
-| codex-storyboard-animatic | 粗预演计划 | 输出按有理帧率、整数帧编排的面板时长和临时音轨引用，交本地 Worker 生成粗预演。 |
-| codex-storyboard-tasks | 生产包交付 | 逐镜绑定固定资产和上游revision，建立任务依赖；自动完整任务交给生产插件，局部变更只影响相关镜头。 |
+| storyboard-resolve | 读取意图与素材 | 核对每场导演意图、现有资产ID/版本和缺失项；允许原创时登记任务，否则集中请求素材。 |
+| storyboard-shots | 镜头拆解 | 为每镜创建稳定ID、显示镜号、景别、动作、声音、时长与入出状态；高密度动作拆成可执行镜头。 |
+| storyboard-panels | 图文面板 | 每镜允许多个分镜面板；先生成文字布局，按授权调用现有图片插件并关联真实候选文件。 |
+| storyboard-continuity | 连续性检查 | 检查角色服装、唯一道具、左右方向、动作接点、光线和剧情状态；检查时长合计与对白长度。 |
+| storyboard-animatic | 粗预演计划 | 输出按有理帧率、整数帧编排的面板时长和临时音轨引用，交本地 Worker 生成粗预演。 |
+| storyboard-tasks | 生产包交付 | 逐镜绑定固定资产和上游revision，建立任务依赖；自动完整任务交给生产插件，局部变更只影响相关镜头。 |
 
 ```mermaid
 flowchart LR
@@ -71,4 +71,4 @@ flowchart LR
 
 ## 7. 发行边界
 
-本轮不安装、不创建 marketplace entry。实现阶段再依据真实可用 Skills 创建 .codex-plugin/plugin.json；插件 ID 使用 codex-storyboard，repo 名带 -plugin，与现有组织仓库命名一致。若脚手架要求包目录与ID相同，放在 plugins/codex-storyboard 并在发行目录保持同名，不为绕过规范改变用户仓库名。
+本轮不安装、不创建 marketplace entry。实现阶段再依据真实可用 Skills 创建 .codex-plugin/plugin.json；插件 ID 使用 storyboard，repo 名带 -plugin，与现有组织仓库命名一致。若脚手架要求包目录与ID相同，放在 plugins/storyboard 并在发行目录保持同名，不为绕过规范改变用户仓库名。

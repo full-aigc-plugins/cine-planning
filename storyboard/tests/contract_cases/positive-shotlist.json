@@ -13,10 +13,10 @@
     { "id": "prop:phone", "name": "手机" }
   ],
   "assets": [
-    { "id": "A01", "kind": "board", "path": "boards/s001.png", "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "authorized": true, "source": "codex-image-factory@2" },
-    { "id": "A02", "kind": "board", "path": "boards/s002.png", "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "authorized": true, "source": "codex-image-factory@2" },
-    { "id": "A03", "kind": "board", "path": "boards/s003.png", "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "authorized": true, "source": "codex-image-factory@2" },
-    { "id": "A04", "kind": "board", "path": "boards/s004.png", "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "authorized": true, "source": "codex-image-factory@2" }
+    { "id": "A01", "kind": "board", "path": "boards/s001.png", "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "authorized": true, "source": "image-factory@2" },
+    { "id": "A02", "kind": "board", "path": "boards/s002.png", "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "authorized": true, "source": "image-factory@2" },
+    { "id": "A03", "kind": "board", "path": "boards/s003.png", "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "authorized": true, "source": "image-factory@2" },
+    { "id": "A04", "kind": "board", "path": "boards/s004.png", "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "authorized": true, "source": "image-factory@2" }
   ],
   "speech": {
     "language": "zh",

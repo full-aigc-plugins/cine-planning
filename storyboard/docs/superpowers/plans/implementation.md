@@ -8,7 +8,7 @@
 |---|---|---|
 | P01 契约锁定 | contracts.lock.json、tests/contract_cases/ | 固定上游 commit/hash，可解析正例，拒绝字段/引用反例 |
 | P02 领域素材读取 | scripts/context_reader、相关 Skill | 分页、出处/版本、缺失输入与冷会话恢复 |
-| P03 创作工作流 | plugins/codex-storyboard/skills/，按下表顺序 | 用户目标到领域结构化候选 |
+| P03 创作工作流 | plugins/storyboard/skills/，按下表顺序 | 用户目标到领域结构化候选 |
 | P04 平台回填 | scripts/workbench_adapter、tests/integration/ | 真实 MCP 写入、幂等、revision冲突 |
 | P05 领域评估 | evals/cases、evals/rubric、reports/ | 黄金案例、失败案例、人工/模型意见分离 |
 | P06 分发与宿主验收 | 插件 manifest、宿主安装文档 | Codex/WorkBuddy实际能力矩阵与版本固定 |

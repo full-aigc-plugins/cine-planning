@@ -15,12 +15,12 @@
 
 | Skill 计划名 | 用途 | 可观察行为 |
 |---|---|---|
-| codex-director-context | 剧本与约束读取 | 读取选定剧本、世界设定、时长、风格、已有资产与锁定项；上游 stale 时先记录影响。 |
-| codex-director-treatment | 导演阐述 | 逐场定义情绪、叙事目的、视听节奏、表演重点；避免空泛的电影感形容词。 |
-| codex-director-blocking | 调度与连续性 | 确定空间轴线、人物站位、视线、运动方向、动作与接触点、镜头入出状态。 |
-| codex-director-coverage | 镜头意图 | 按场次定义建立/推进/反应/插入等覆盖需求，景别、焦距意图与时长区间；不过早制造具体机型承诺。 |
-| codex-director-route | 生产路线规划 | 复杂空间/动作走 Blender 或已有 DCC，简单特写/环境可用参考图；给出依赖、费用未知项与质量风险。 |
-| codex-director-handoff | 变更建议与交接 | 需要改剧本时发 ChangeProposal；保存 DirectorPlan 固定版本，交给 Storyboard 具体化。 |
+| director-context | 剧本与约束读取 | 读取选定剧本、世界设定、时长、风格、已有资产与锁定项；上游 stale 时先记录影响。 |
+| director-treatment | 导演阐述 | 逐场定义情绪、叙事目的、视听节奏、表演重点；避免空泛的电影感形容词。 |
+| director-blocking | 调度与连续性 | 确定空间轴线、人物站位、视线、运动方向、动作与接触点、镜头入出状态。 |
+| director-coverage | 镜头意图 | 按场次定义建立/推进/反应/插入等覆盖需求，景别、焦距意图与时长区间；不过早制造具体机型承诺。 |
+| director-route | 生产路线规划 | 复杂空间/动作走 Blender 或已有 DCC，简单特写/环境可用参考图；给出依赖、费用未知项与质量风险。 |
+| director-handoff | 变更建议与交接 | 需要改剧本时发 ChangeProposal；保存 DirectorPlan 固定版本，交给 Storyboard 具体化。 |
 
 ```mermaid
 flowchart LR
@@ -71,4 +71,4 @@ flowchart LR
 
 ## 7. 发行边界
 
-本轮不安装、不创建 marketplace entry。实现阶段再依据真实可用 Skills 创建 .codex-plugin/plugin.json；插件 ID 使用 codex-director，repo 名带 -plugin，与现有组织仓库命名一致。若脚手架要求包目录与ID相同，放在 plugins/codex-director 并在发行目录保持同名，不为绕过规范改变用户仓库名。
+本轮不安装、不创建 marketplace entry。实现阶段再依据真实可用 Skills 创建 .codex-plugin/plugin.json；插件 ID 使用 director，repo 名带 -plugin，与现有组织仓库命名一致。若脚手架要求包目录与ID相同，放在 plugins/director 并在发行目录保持同名，不为绕过规范改变用户仓库名。
